@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                        xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms"
+                        x:Class="SoCalCodeCamp.DeepDive.App">
+  <prism:PrismApplication.Resources>
+    <ResourceDictionary>
+      <Color x:Key="Primary">#FFC107</Color>
+      <Color x:Key="PrimaryDark">#FFA000</Color>
+      <Color x:Key="Accent">#448AFF</Color>
+      <Color x:Key="TextColor">#212121</Color>
+      <Color x:Key="NavigationTextColor">White</Color>
+
+      <Style TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
+        <Setter Property="TextColor" Value="{StaticResource NavigationTextColor}" />
+      </Style>
+      <Style TargetType="NavigationPage">
+        <Setter Property="BarBackgroundColor" Value="{StaticResource Primary}" />
+        <Setter Property="BarTextColor" Value="{StaticResource NavigationTextColor}" />
+      </Style>
+      <Style TargetType="TabbedPage">
+        <Setter Property="BarBackgroundColor" Value="{StaticResource PrimaryDark}" />
+        <Setter Property="BarTextColor" Value="{StaticResource NavigationTextColor}" />
+      </Style>
+    </ResourceDictionary>
+  </prism:PrismApplication.Resources>
+</prism:PrismApplication>
