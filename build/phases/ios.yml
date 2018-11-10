@@ -50,5 +50,5 @@ phases:
   - task: PublishBuildArtifacts@1
     displayName: 'Publish Artifact: iOS'
     inputs:
-      PathtoPublish: 'src/SoCalCodeCamp.DeepDive/bin/iPhone/$(BuildConfiguration)'
+      PathtoPublish: 'src/SoCalCodeCamp.DeepDive.iOS/bin/iPhone/$(BuildConfiguration)'
       ArtifactName: iOS
