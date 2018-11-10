@@ -1,14 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Microsoft.AppCenter.Push;
+using Microsoft.IdentityModel.JsonWebTokens;
 using Prism;
+using Prism.Events;
 using Prism.Ioc;
 using Prism.Modularity;
+using SoCalCodeCamp.AuthDemo.Services;
 using SoCalCodeCamp.DeepDive.Helpers;
+using SoCalCodeCamp.DeepDive.Services;
+using SoCalCodeCamp.DeepDive.Views;
+using SoCalCodeCamp.DeepLinking;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -30,7 +37,8 @@ namespace SoCalCodeCamp.DeepDive
             AppCenter.Start(Secrets.AppCenterSecret, typeof(Analytics), typeof(Crashes), typeof(Push));
 #endif
 
-            var result = await NavigationService.NavigateAsync("LoginPage");
+            var ea = Container.Resolve<IEventAggregator>();
+            var result = await NavigationService.NavigateAsync("HomePage/NavigationPage/ViewA");
             if(!result.Success)
             {
 #if DEBUG
@@ -46,12 +54,15 @@ namespace SoCalCodeCamp.DeepDive
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            
+            containerRegistry.Register<IGravatarService, GravatarService>();
+
+            containerRegistry.RegisterForNavigation<NavigationPage>();
+            containerRegistry.RegisterForNavigation<HomePage>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
-            
+            moduleCatalog.AddModule<DeepLinkingModule>();
         }
 
 #if DEBUG
@@ -66,5 +77,10 @@ namespace SoCalCodeCamp.DeepDive
                 Debug.WriteLine($"    {category}: {message}");
         }
 #endif
+
+        private void OnUserAuthenticated()
+        {
+            NavigationService.NavigateAsync("/HomePage");
+        }
     }
 }

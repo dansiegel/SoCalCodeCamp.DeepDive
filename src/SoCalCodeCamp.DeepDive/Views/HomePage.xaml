@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:nav="clr-namespace:Prism.Navigation.Xaml;assembly=Prism.Forms"
+                  xmlns:converters="clr-namespace:SoCalCodeCamp.DeepDive.Converters"
+                  xmlns:ioc="clr-namespace:Prism.Ioc;assembly=Prism.Forms"
+                  x:Class="SoCalCodeCamp.DeepDive.Views.HomePage">
+  <MasterDetailPage.Master>
+    <ContentPage Title="Menu">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="150" />
+          <RowDefinition Height="50" />
+          <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <BoxView BackgroundColor="{StaticResource Primary}" />
+        <Frame WidthRequest="80"
+               HeightRequest="80"
+               Margin="0,0,0,15"
+               HorizontalOptions="Center"
+               VerticalOptions="End"
+               BackgroundColor="{StaticResource Accent}"
+               CornerRadius="50"
+               Grid.RowSpan="2">
+          <!-- TODO: Put the User's Gravatar Image Here -->
+        </Frame>
+        <StackLayout Grid.Row="2"
+                     Padding="20">
+          <!-- TODO: Add some Menu Options Here -->
+        </StackLayout>
+      </Grid>
+    </ContentPage>
+  </MasterDetailPage.Master>
+</MasterDetailPage>
