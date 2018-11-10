@@ -6,11 +6,13 @@ using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Microsoft.AppCenter.Push;
+using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Prism;
 using Prism.Events;
 using Prism.Ioc;
 using Prism.Modularity;
+using SoCalCodeCamp.AuthDemo.Services;
 using SoCalCodeCamp.DeepDive.Helpers;
 using SoCalCodeCamp.DeepDive.Services;
 using SoCalCodeCamp.DeepDive.Views;
@@ -37,7 +39,8 @@ namespace SoCalCodeCamp.DeepDive
 #endif
 
             var ea = Container.Resolve<IEventAggregator>();
-            var result = await NavigationService.NavigateAsync("HomePage/NavigationPage/ViewA");
+            ea.GetEvent<AuthDemo.Events.UserAuthenticatedEvent>().Subscribe(OnUserAuthenticated);
+            var result = await NavigationService.NavigateAsync("LoginPage");
             if(!result.Success)
             {
 #if DEBUG
@@ -54,6 +57,7 @@ namespace SoCalCodeCamp.DeepDive
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.Register<IGravatarService, GravatarService>();
+            containerRegistry.Register<IAADOptions, AuthOptions>();
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<HomePage>();
@@ -61,7 +65,9 @@ namespace SoCalCodeCamp.DeepDive
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
-            moduleCatalog.AddModule<DeepLinkingModule>();
+            moduleCatalog.AddModule<DeepLinkingModule>(InitializationMode.WhenAvailable);
+            moduleCatalog.AddModule<AuthDemo.AuthModule>();
+            moduleCatalog.AddModule<LoggingDemo.LoggingModule>();
         }
 
 #if DEBUG
@@ -77,9 +83,17 @@ namespace SoCalCodeCamp.DeepDive
         }
 #endif
 
-        private void OnUserAuthenticated()
+        private async void OnUserAuthenticated(AuthenticationResult result)
         {
-            NavigationService.NavigateAsync("/HomePage");
+            Container.Resolve<IModuleManager>().LoadModule(nameof(DeepLinkingModule));
+            var jwt = new JsonWebToken(result.AccessToken);
+            var email = jwt.Claims.First(x => x.Type == "emails").Value;
+            var navResult = await NavigationService.NavigateAsync($"/HomePage?email={email}/NavigationPage/ViewA");
+
+            if(!navResult.Success)
+            {
+                Debugger.Break();
+            }
         }
     }
 }

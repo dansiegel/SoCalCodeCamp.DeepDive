@@ -22,6 +22,7 @@ namespace SoCalCodeCamp.DeepDive.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            Rg.Plugins.Popup.Popup.Init();
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 

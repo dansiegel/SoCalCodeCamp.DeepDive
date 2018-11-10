@@ -5,6 +5,11 @@
                   xmlns:converters="clr-namespace:SoCalCodeCamp.DeepDive.Converters"
                   xmlns:ioc="clr-namespace:Prism.Ioc;assembly=Prism.Forms"
                   x:Class="SoCalCodeCamp.DeepDive.Views.HomePage">
+  <MasterDetailPage.Resources>
+    <ResourceDictionary>
+      <ioc:ContainerProvider x:TypeArguments="converters:EmailToGravatarConverter" x:Key="gravatar" />
+    </ResourceDictionary>
+  </MasterDetailPage.Resources>
   <MasterDetailPage.Master>
     <ContentPage Title="Menu">
       <Grid>
@@ -13,7 +18,7 @@
           <RowDefinition Height="50" />
           <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <BoxView BackgroundColor="{StaticResource Primary}" />
+        <BoxView BackgroundColor="{StaticResource PrimaryDark}" />
         <Frame WidthRequest="80"
                HeightRequest="80"
                Margin="0,0,0,15"
@@ -23,10 +28,15 @@
                CornerRadius="50"
                Grid.RowSpan="2">
           <!-- TODO: Put the User's Gravatar Image Here -->
+          <Image Source="{Binding Email,Converter={StaticResource gravatar}}" />
         </Frame>
         <StackLayout Grid.Row="2"
                      Padding="20">
           <!-- TODO: Add some Menu Options Here -->
+          <Button Text="Deep Link"
+                  Command="{nav:NavigateTo 'NavigationPage/ViewA/ViewB/ViewC/ViewD'}" />
+          <Button Text="Logging Settings"
+                  Command="{nav:NavigateTo 'NavigationPage/LoggingSettingsPage'}" />
         </StackLayout>
       </Grid>
     </ContentPage>
