@@ -1,0 +1,18 @@
+trigger:
+- master
+- dev
+
+name: $(Build.BuildId)
+
+variables:
+  BuildConfiguration: 'Release'
+  TargetSolution: 'SoCalCodeCamp.DeepDive.sln'
+
+phases:
+- template: phases/android.yml
+  parameters:
+    solution: $(TargetSolution)
+
+- template: phases/ios.yml
+  parameters:
+    solution: $(TargetSolution)

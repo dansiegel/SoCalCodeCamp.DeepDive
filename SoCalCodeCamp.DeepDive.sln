@@ -3,13 +3,38 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2050
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoCalCodeCamp.DeepDive.Android", "SoCalCodeCamp.DeepDive\SoCalCodeCamp.DeepDive.Android\SoCalCodeCamp.DeepDive.Android.csproj", "{73B6F377-032B-456B-95CC-AF16D83D1CCC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoCalCodeCamp.DeepDive.Android", "src\SoCalCodeCamp.DeepDive.Android\SoCalCodeCamp.DeepDive.Android.csproj", "{73B6F377-032B-456B-95CC-AF16D83D1CCC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoCalCodeCamp.DeepDive.iOS", "SoCalCodeCamp.DeepDive\SoCalCodeCamp.DeepDive.iOS\SoCalCodeCamp.DeepDive.iOS.csproj", "{A3F5C83E-9A07-41A4-8413-DB78D8997079}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoCalCodeCamp.DeepDive.iOS", "src\SoCalCodeCamp.DeepDive.iOS\SoCalCodeCamp.DeepDive.iOS.csproj", "{A3F5C83E-9A07-41A4-8413-DB78D8997079}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoCalCodeCamp.DeepDive.UWP", "SoCalCodeCamp.DeepDive\SoCalCodeCamp.DeepDive.UWP\SoCalCodeCamp.DeepDive.UWP.csproj", "{593E83A5-BD66-4B30-9D44-B3E1607F69B4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoCalCodeCamp.DeepDive.UWP", "src\SoCalCodeCamp.DeepDive.UWP\SoCalCodeCamp.DeepDive.UWP.csproj", "{593E83A5-BD66-4B30-9D44-B3E1607F69B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoCalCodeCamp.DeepDive", "SoCalCodeCamp.DeepDive\SoCalCodeCamp.DeepDive\SoCalCodeCamp.DeepDive.csproj", "{D9E52CA4-A947-436E-941D-90AE0DDBE3EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoCalCodeCamp.DeepDive", "src\SoCalCodeCamp.DeepDive\SoCalCodeCamp.DeepDive.csproj", "{D9E52CA4-A947-436E-941D-90AE0DDBE3EF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FBB2B968-DAD4-4CA1-AB3C-5998E29B49FD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{895FB095-F709-48DD-A87D-FB91BCD6910F}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{234B99B8-9BEF-44B3-9BB3-0C0B9839EF99}"
+	ProjectSection(SolutionItems) = preProject
+		build\AndroidTemplateManifest.xml = build\AndroidTemplateManifest.xml
+		build\azure-pipelines.yml = build\azure-pipelines.yml
+		build\BuildTemplateInfo.plist = build\BuildTemplateInfo.plist
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "phases", "phases", "{6E7853D7-773E-4345-B27D-0EE77C1B2938}"
+	ProjectSection(SolutionItems) = preProject
+		build\phases\android.yml = build\phases\android.yml
+		build\phases\ios.yml = build\phases\ios.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "steps", "steps", "{57016E48-3B45-4E58-A98D-5B207381859F}"
+	ProjectSection(SolutionItems) = preProject
+		build\steps\nuget-restore.yml = build\steps\nuget-restore.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -330,6 +355,14 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{73B6F377-032B-456B-95CC-AF16D83D1CCC} = {FBB2B968-DAD4-4CA1-AB3C-5998E29B49FD}
+		{A3F5C83E-9A07-41A4-8413-DB78D8997079} = {FBB2B968-DAD4-4CA1-AB3C-5998E29B49FD}
+		{593E83A5-BD66-4B30-9D44-B3E1607F69B4} = {FBB2B968-DAD4-4CA1-AB3C-5998E29B49FD}
+		{D9E52CA4-A947-436E-941D-90AE0DDBE3EF} = {FBB2B968-DAD4-4CA1-AB3C-5998E29B49FD}
+		{6E7853D7-773E-4345-B27D-0EE77C1B2938} = {234B99B8-9BEF-44B3-9BB3-0C0B9839EF99}
+		{57016E48-3B45-4E58-A98D-5B207381859F} = {234B99B8-9BEF-44B3-9BB3-0C0B9839EF99}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6F79A675-F836-4487-B2C5-90F0E3A67AAD}

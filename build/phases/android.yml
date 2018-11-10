@@ -1,0 +1,61 @@
+parameters:
+  solution: '**/*.sln'
+
+phases:
+- phase: AndroidBuild
+  displayName: Build Android App
+  condition: succeeded()
+  queue:
+    name: Hosted macOS
+    demands:
+    - MSBuild
+    - Xamarin.Android
+    - JDK
+    - AndroidSDK
+
+  steps:
+  - task: DownloadSecureFile@1
+    displayName: 'Download secure file'
+    inputs:
+      secureFile: 'google-services.json'
+
+  - task: CopyFiles@2
+    displayName: 'Copy Files to: src/SoCalCodeCamp.DeepDive.Android/'
+    inputs:
+      SourceFolder: '$(Agent.TempDirectory)'
+      Contents: '**/google-services.json'
+    TargetFolder: src/SoCalCodeCamp.DeepDive.Android/
+
+  - template: ../steps/nuget-restore.yml
+    parameters:
+      solution: ${{ parameters.solution }}
+
+  - task: XamarinAndroid@1
+    displayName: 'Build Xamarin.Android project **/*Android*.csproj'
+    inputs:
+      projectFile: '**/*Android*.csproj'
+      outputDirectory: '$(Build.BinariesDirectory)/$(BuildConfiguration)'
+      configuration: '$(BuildConfiguration)'
+    env:
+      Secret_AppCenterSecret: $(AndroidAppCenterSecret)
+      Secret_B2CTenant: $(B2CTenant)
+      Secret_B2CApplicationId: $(B2CApplicationId),
+      Secret_B2CScopes: $(B2CScopes)
+      Secret_B2CPolicy: $(B2CPolicy)
+      Manifest_B2CApplicationId: $(B2CApplicationId)
+      Manifest_AppCenterSecret: $(AndroidAppCenterSecret)
+
+  - task: AndroidSigning@3
+    displayName: 'Signing and aligning APK file(s) $(Build.BinariesDirectory)/$(BuildConfiguration)/*.apk'
+    inputs:
+      apkFiles: '$(Build.BinariesDirectory)/$(BuildConfiguration)/*.apk'
+      apksignerKeystoreFile: $(KeystoreFileName)
+      apksignerKeystorePassword: '$(KeystorePassword)'
+      apksignerKeystoreAlias: '$(KeystoreName)'
+      apksignerKeyPassword: '$(KeystorePassword)'
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact: Droid'
+    inputs:
+      PathtoPublish: '$(Build.BinariesDirectory)/$(BuildConfiguration)'
+      ArtifactName: Droid
