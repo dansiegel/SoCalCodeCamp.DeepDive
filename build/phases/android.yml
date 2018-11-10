@@ -43,7 +43,7 @@ phases:
       Secret_B2CScopes: $(B2CScopes)
       Secret_B2CPolicy: $(B2CPolicy)
       Manifest_B2CApplicationId: $(B2CApplicationId)
-      Manifest_AppCenterSecret: $(AndroidAppCenterSecret)
+      Manifest_AppCenterSecret: $(AndroidAppCenterPushId)
 
   - task: AndroidSigning@3
     displayName: 'Signing and aligning APK file(s) $(Build.BinariesDirectory)/$(BuildConfiguration)/*.apk'
