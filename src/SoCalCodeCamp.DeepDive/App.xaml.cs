@@ -11,7 +11,6 @@ using Prism;
 using Prism.Events;
 using Prism.Ioc;
 using Prism.Modularity;
-using SoCalCodeCamp.AuthDemo.Services;
 using SoCalCodeCamp.DeepDive.Helpers;
 using SoCalCodeCamp.DeepDive.Services;
 using SoCalCodeCamp.DeepDive.Views;
