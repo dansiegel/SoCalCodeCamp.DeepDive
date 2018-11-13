@@ -20,6 +20,8 @@
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <AutomaticVersionBehavior>PreferBuildNumber</AutomaticVersionBehavior>
+    <AutomaticVersionEnvironment>BuildHost</AutomaticVersionEnvironment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

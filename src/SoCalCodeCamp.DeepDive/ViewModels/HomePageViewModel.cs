@@ -14,7 +14,8 @@ namespace SoCalCodeCamp.DeepDive.ViewModels
 
         public void OnNavigatingTo(INavigationParameters parameters)
         {
-            Email = parameters.GetValue<string>("email");
+            if(parameters.ContainsKey("email"))
+                Email = parameters.GetValue<string>("email");
         }
     }
 }
